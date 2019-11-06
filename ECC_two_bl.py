@@ -9,15 +9,17 @@ from fonctions import n_premiers, hexadeci, deci, euclide_etendu, crypter, decry
 
 listex=[]
 listey=[]
-a=4
-b=1
+a=int(input("Entrez la valeur de a: "))
+b=int(input("Entrez la valeur de b: "))
 lambd=0
-modulo=1297
+modulo = int(input("Entrez la valeur du modulo: "))
+#modulo=1297
 temp=0
 i=1
 kerr=2 # Taille des blocs unitaires a coder
 best_gen=[]
 # Calcul du Nombre de blocs
+#caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v']
 caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0']
 nchar=len(caracteres)
 bl_size=nchar**2
@@ -99,9 +101,10 @@ for x,y in zip(listex,listey):
 print (couple)
 ## Cryptage
 k = 3265477 # cle publique ??
+l = 23 # cle privee ??
 beta = k%modulo
 texte="tempo22"
-texte1='jevousaimee'
+texte1="sicom2019"
 print(len(texte1))
 result=[]
 indice=0
@@ -109,7 +112,7 @@ message=''
 messagec=''
 hexamessagec='' # Message hexadecimal crypte
 hexamessage='' # Message hexadecimal decrypte
-bonus='y'
+bonus='h'
 
 toto=0
 
@@ -130,14 +133,14 @@ while toto!=1:
 
 	point=(couple[nombre]) #equivalent du message dans la courbe elliptique
 
-	crypte = crypter(point,modulo,couple,n_points)
-	indexc = couple.index(crypte)
-	cm=combs[indexc]
-	print(" Le message chiffre est :", cm)
-	hexamessagec = hexamessagec + (str(cm))
-	cm = binascii.unhexlify(cm).decode() # Conversion en chaine de caracteres
-	messagec=messagec+cm
-	decrypte = decrypter(crypte,modulo,couple,n_points)
+	crypte = crypter(point, bl_size, couple, k, l)
+	# indexc = couple.index(crypte)
+	# cm=combs[indexc]
+	# print(" Le message chiffre est :", cm)
+	# hexamessagec = hexamessagec + (str(cm))
+	# cm = binascii.unhexlify(cm).decode() # Conversion en chaine de caracteres
+	# messagec=messagec+cm
+	decrypte = decrypter(crypte, bl_size, couple, l)
 	index = couple.index(decrypte)
 	decm=combs[index]
 	print(" Le message dechiffre est :", decm)

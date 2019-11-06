@@ -43,22 +43,27 @@ def euclide_etendu(e, phi_n, val) :
   return d
 
 # Cryptage et Decryptage
-def crypter(m, phi_n, tab, coef) :
+def crypter(m, phi_n, tab, k, kpv) :
 	cpt=[]
 	## Cryptage
 	print("code a chiffrer:" , m)
-	y1=tab[(coef-1)%phi_n]
-	y2=tab.index(m)+(coef*coef)
-	indice = y2%phi_n
-	cpt=tab[indice]
+	y1=tab[(k-1)%phi_n]
+	y2=tab.index(m)+((k-1)*(kpv-1))
+	indice2 = y2%phi_n
+	y2=tab[indice2]
+	cpt=(y1,y2)
 	print("code chiffre:", cpt)
+
 	return cpt
 
-def decrypter(m, phi_n, tab, coef) :
+def decrypter(m, phi_n, tab, kpv) :
 	dcpt=[]
 	## Decryptage
-	indice=tab.index(m)
-	dec = (indice-coef*coef)%phi_n
+	y1 = m[0]
+	y2 = m[1]
+	indice1=tab.index(y1)
+	indice2=tab.index(y2)
+	dec = (indice2-(kpv-1)*indice1)%phi_n
 	dcpt=tab[dec]
 	print("code dechiffre:", dcpt)
 	return dcpt
@@ -159,9 +164,9 @@ def calc_order_Gen(G,a,b,mod):
 		else :
 			cur_a=calc_o_alpha(G[0],G[1],cur_a[0],cur_a[1],mod,a)
 	# print ('all_alpha',all_alpha)
-	print('_________________________________________________________________')
+	#print('_________________________________________________________________')
 	# print('ordre de (' + str(G[0])+' , ' + str(G[1]) +') '+str(len(all_alpha)))
-	# print('ordre de (' + str(G[0])+' , ' + str(G[1]) +') '+str(i))
+	#print('ordre de (' + str(G[0])+' , ' + str(G[1]) +') '+str(i))
 	# order=len (all_alpha)
 	return i
 	
