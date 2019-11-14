@@ -2,27 +2,28 @@
 # cd /Users/kourakanewane/Desktop/rangement/Cours/M2\ RISM/Securite\ des\ services\ web
 # cd \Documents\GitHub\Applications
 import random
+import hashlib
 import math
 from itertools import product
 import binascii
-from fonctions import n_premiers, hexadeci, deci, euclide_etendu, crypter, decrypter, calc_2alpha, calc_o_alpha, calc_n_alpha, calc_G, calc_order_Gen, best_generator
+from fonctions import n_premiers, hexadeci, deci, euclide_etendu, crypter, decrypter, calc_2alpha, calc_o_alpha, calc_n_alpha, calc_G, calc_order_Gen, best_generator, hash_fichier
 
 listex=[]
 listey=[]
-a=4
-b=1
-# a=int(input("Entrez la valeur de a: "))
-# b=int(input("Entrez la valeur de b: "))
+# a=4
+# b=1
+a=int(input("Entrez la valeur de a: "))
+b=int(input("Entrez la valeur de b: "))
 lambd=0
-# modulo = int(input("Entrez la valeur du modulo: "))
-modulo=503
+modulo = int(input("Entrez la valeur du modulo: "))
+# modulo=503
 temp=0
 i=1
 kerr=2 # Taille des blocs unitaires a coder
 best_gen=[]
 # Calcul du Nombre de blocs
 caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v']
-#caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0']
+# caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0']
 nchar=len(caracteres)
 bl_size=nchar**2
 Gen=calc_G(a,b,modulo)
@@ -106,7 +107,7 @@ k = 3265477 # cle publique ??
 l = 23 # cle privee ??
 beta = k%modulo
 texte1="tempoalpha"
-texte="sicom2019"
+# texte="sicom2019"
 print(len(texte1))
 result=[]
 indice=0
@@ -160,3 +161,20 @@ print("Message hexa chiffre:", hexamessagec)
 print("Message chiffre:", messagec)
 print("Message hexa dechiffre:", hexamessage)
 print("Message dechiffre:", message)
+
+fichier = raw_input("Entrez le nom de votre fichier: ")
+
+hash_fichier(fichier)
+
+# hasher = hashlib.md5()
+# # nom="texte"
+# # nom=nom+'.txt'
+# # print(nom)
+# fichier="./"+fichier
+# with open(fichier, 'rb') as afile:
+#     buf = afile.read()
+#     hasher.update(buf)
+#     temp=hasher.hexdigest()
+
+# print(temp)
+

@@ -1,6 +1,7 @@
 #!/bin/python3
 import binascii
 import math
+import hashlib
 
 # Calcul du modulo
 def n_premiers(lower,upper):
@@ -192,3 +193,15 @@ def best_generator(Gen,a,b,mod,bs):
 	print('b_size__________________________________',b_size)
 	print('b_gen__________________________________',b_gen)
 	return b_gen
+
+
+def hash_fichier(nom_fichier):
+	hasher = hashlib.md5()
+	# nom=nom_fichier+".txt"
+	# print(nom)
+	with open(nom_fichier, 'rb') as afile:
+	    buf = afile.read()
+	    hasher.update(buf)
+	    res=hasher.hexdigest()
+	    print(res)
+	return res

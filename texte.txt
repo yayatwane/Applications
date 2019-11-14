@@ -1,0 +1,7 @@
+By using the Matlab script which you have been provided with, you should complete the following tasks. Consider the grids of size L = 5, 10, . . . , 100, use the matlab script provided to you to perform the following operations and comment what you see and the results:
+i. [2 pts] calculate for each value of L the optimal size of a covering set of nodes C. How many messages would be exchanged to monitor all nodes?
+ii. [2 pts] calculate for each value of L the size of an identifying set of nodes I. What is the typical run of the greedy algorithm?
+iii. [2 pts] produce a figure which compares the two values |C| and |I| for an increasing number of nodes L = 5, 10, 15, 20, 25;
+iv. [4 pts] consider L = 5, i.e., a grid with N = 25 nodes. Calculate an identifying set of nodes: how many nodes can you remove before the set does not identify any more? Can you remove some nodes from the set and have still a covering – possibly not identifying – set of nodes?
+Note 1: the expected time for this TP is of 3 hours; you can use any of the scripts you find in the directory provided to you.
+Note 2: You should work in groups of 3 people maximum.
