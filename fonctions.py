@@ -1,23 +1,5 @@
 #!/bin/python3
 import binascii
-# from cryptography.fernet import Fernet
-
-# key = Fernet.generate_key()
-# print(key)
-
-# file = open('key.key', 'wb')
-# file.write(key) # Key est de type bytes - wb
-# file.close()
-
-
-
-# file = open('key.key')
-# key = file.read()
-# file.close()
-# print(key)
-
-
-
 
 # Calcul du modulo
 def n_premiers(lower,upper):
