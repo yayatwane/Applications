@@ -1,5 +1,6 @@
 #!/bin/python3
 import binascii
+import math
 
 # Calcul du modulo
 def n_premiers(lower,upper):
@@ -175,7 +176,8 @@ def best_generator(Gen,a,b,mod,bs):
 	order=0
 	b_gen=[]
 	print('Gen_0__________________________________',Gen[0])
-	b_size=mod+2*(mod**(1/2))+1
+	# b_size=mod+2*(mod**(1/2))+1
+	b_size=mod+2*math.sqrt(mod)+1
 	# b_size=calc_order_Gen(Gen[0],a,b,mod)
 	for t in Gen:
 		order=calc_order_Gen(t,a,b,mod)
