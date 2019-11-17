@@ -7,14 +7,16 @@ https://pypi.org/project/fastecdsa/
 ____________________________________________________________________________________________________________
 Target: Obtenir a partir d'une courbe elliptique, tous les parametres pour avoir un nombre de points optimal
 ____________________________________________________________________________________________________________
-1) - Input: a, b, t(taille du block unitaire a chiffrer) 
-2) Done- Calcul du nombre de possibilités de blocs $bl_size       - Uploaded
+1) Done - Input: a, b, t(taille du block unitaire a chiffrer)	  - Uploaded 
+2) Done - Calcul du nombre de possibilités de blocs $bl_size      - Uploaded
 3) Done - Generer les blocs a partir de la liste de {caracteres}  - Uploaded
 4) Done - Coder en ascii puis stocker dans la liste de {blocs}    - Uploaded
 5) Done - Générer notre $modulo tel que modulo > bl_size          - Uploaded
-6)  - Choisir un générateur tel que ordre(G) > bl_size
+6) Done - Choisir un générateur tel que ordre(G) > bl_size		  - Uploaded		
 7) Done - Associer le blocs[i] à coder à un point elliptique      - Uploaded
 8) Done - Chiffrer le bloc                                        - Uploaded
 9) Done - Déchiffrer le bloc                                      - Uploaded
-10) - Mise en fonction des operations d'addition
-11) - Cryptage des blocs ascii avant envoi
+10)Done - Mise en fonction des operations d'addition			  - Uploaded
+11)Done - Cryptage hexadecimal des blocs ascii avant envoi		  - Uploaded
+12)Done - Verification du modulo (primalite et ordre maximal)	  - Uploaded
+13)Done - Affichage d'une liste indicative de modulos eventuels   - Uploaded

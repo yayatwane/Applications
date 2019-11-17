@@ -3,7 +3,7 @@ import binascii
 import math
 import hashlib
 
-# Calcul du modulo
+# Calcul des modulos possibles
 def n_premiers(lower,upper):
 	print("Les nombres premiers entre",lower,"et",upper,"sont:")
 	prime=[]
@@ -35,7 +35,16 @@ def deci(listeh):
 		listed.append(deci)
 	print(listed)
 	return listed
-
+# Verifier si un nombre est premier
+def is_prime(nombre_premier):
+	g = True
+	for i in (2,nombre_premier):
+		while g:
+			if nombre_premier%i == 0:
+				return False
+			else:
+				return True
+# Algorithme dEuclide etendu 
 def euclide_etendu(e, phi_n, val) :
   d = 1
   temp = (e*d)%phi_n
@@ -44,7 +53,7 @@ def euclide_etendu(e, phi_n, val) :
     temp = (e*d)%phi_n
   return d
 
-# Cryptage et Decryptage
+# Cryptage
 def crypter(m, phi_n, tab, k, kpv) :
 	cpt=[]
 	## Cryptage
@@ -57,10 +66,9 @@ def crypter(m, phi_n, tab, k, kpv) :
 	print("code chiffre:", cpt)
 
 	return cpt
-
+# Decryptage
 def decrypter(m, phi_n, tab, kpv) :
 	dcpt=[]
-	## Decryptage
 	y1 = m[0]
 	y2 = m[1]
 	indice1=tab.index(y1)
@@ -70,7 +78,7 @@ def decrypter(m, phi_n, tab, kpv) :
 	print("code dechiffre:", dcpt)
 	return dcpt
 
-#calcul de 2 alpha
+# Calcul de 2 alpha
 def calc_2alpha(x1,y1,mod,a):
 	lamda=0	
 	e=2*y1%mod
@@ -83,27 +91,24 @@ def calc_2alpha(x1,y1,mod,a):
 	temp.append(y3)
 	return temp
 
-#calcul des autres alpha a partir de 3 alpha_______________________ 
+# Calcul des multiples de alpha [3alpha:end]
 def calc_o_alpha(x1,y1,x2,y2,mod,a):
 	lamda=0	
 	e=(x2-x1) % mod
 	omega = (y2-y1) % mod
 	lamda = euclide_etendu(e,mod,omega)
-
 	x3=(lamda**2-x1-x2)%mod
 	y3=(lamda*(x1-x3)-y1)%mod
-
 	temp=[]
 	temp.append(x3)
 	temp.append(y3)
 	return temp
 
-#calcul du generateur____________________________________________________________
+# Calcul des generateurs
 def calc_G(a,b,mod):
 	x=1
-	
 	entier=0
-	counter=0
+	# counter=0
 	Generator=[]
 	while x<mod:
 		y=1
@@ -111,7 +116,7 @@ def calc_G(a,b,mod):
 			rp=((x**3)+(a*x)+b)%mod
 			lp=(y*y)%mod
 			if rp==lp:
-				counter=counter+1
+				# counter=counter+1
 				print ("\n( le generateur est ",x,",",y,")")
 				temp=[]
 				if y!=0:
@@ -121,14 +126,13 @@ def calc_G(a,b,mod):
 					Generator.append(temp)
 			y=y+1
 		x=x+1
-	counter=(counter*2)+1
-	print('counter____________________________________________________________',counter)
+	# counter=(counter*2)+1
+	# print('counter____________________________________________________________',counter)
 	return Generator
 
-#______________Calcul de n alpha_______________________________________________________
+# Calcul de n alpha
 def calc_n_alpha(G,n,mod,a):
 	n_alpha=[]
-	#all_alpha['a']=G
 	two_alpha=[]
 	current_alpha=[]
 	two_alpha=calc_2alpha(G[0],G[1],mod,a)
@@ -144,6 +148,7 @@ def calc_n_alpha(G,n,mod,a):
 	print('n_alpha________________________________________',n_alpha)
 	return n_alpha
 
+# Calcul de lOrdre d'un generateur
 def calc_order_Gen(G,a,b,mod):
 	x1=G[0]
 	y1=G[1]
@@ -154,7 +159,6 @@ def calc_order_Gen(G,a,b,mod):
 	all_alpha['2a']=cur_a
 	i =2
 	while 1:
-		
 		#all_alpha.append(cur_a)
 		# all_alpha[str(i)+'a']=cur_a
 		i=i+1
@@ -171,7 +175,8 @@ def calc_order_Gen(G,a,b,mod):
 	#print('ordre de (' + str(G[0])+' , ' + str(G[1]) +') '+str(i))
 	# order=len (all_alpha)
 	return i
-	
+
+# Calcul du meilleur generateur
 def best_generator(Gen,a,b,mod,bs):
 	b_size=0
 	order=0
@@ -192,12 +197,12 @@ def best_generator(Gen,a,b,mod,bs):
 	print('bs__________________________________',bs)
 	print('b_size__________________________________',b_size)
 	print('b_gen__________________________________',b_gen)
-	return b_gen
+	return b_gen,b_size
 
-
+# Fonction de hashage de fichier
 def hash_fichier(nom_fichier):
 	hasher = hashlib.md5()
-	# nom=nom_fichier+".txt"
+	# nom_fichier=nom_fichier+".txt"
 	# print(nom)
 	with open(nom_fichier, 'rb') as afile:
 	    buf = afile.read()
