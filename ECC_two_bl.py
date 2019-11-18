@@ -9,17 +9,49 @@ import hashlib
 import math
 from itertools import product
 import binascii
-from fonctions import n_premiers, is_prime, hexadeci, deci, euclide_etendu, crypter, decrypter, calc_2alpha, calc_o_alpha, calc_n_alpha, calc_G, calc_order_Gen, best_generator, hash_fichier
+from fonctions import n_premiers, hexadeci, deci, euclide_etendu, crypter, decrypter, calc_2alpha, calc_o_alpha, calc_n_alpha, calc_G, calc_order_Gen, best_generator, hash_fichier
 
 CRED = '\033[91m'
+CVRT = '\033[92m'
 CEND = '\033[0m'
+
 listex=[]
 listey=[]
 kerr=2 # Taille des blocs unitaires a encoder
-
+var_bool=0
+possibilites = {
+	1: 'Caracteres alphabetiques - sans espace',
+	2: 'Caracteres alphabetiques - avec espaces, points et virgules',
+	3: 'Caracteres alphanumeriques - sans espace',
+	4: 'Caracteres alphanumeriques - avec espaces, points et virgules',
+	5: 'Caracteres numeriques'
+}
+while (var_bool==0):
+	programme = input(CVRT+'\n\nChoisissez le programme a implementer: \n - [1] Caracteres alphabetiques - sans espace \n - [2] Caracteres alphabetiques - avec espaces, points et virgules \n - [3] Caracteres alphanumeriques - sans espace \n - [4] Caracteres alphanumeriques - avec espaces, points et virgules \n - [5] Caracteres numeriques \n A vous: '+CEND)
+	programme=int(programme)
+	if (programme==1):
+		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+		var_bool=1
+	elif (programme==2):
+		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ','.',',']
+		var_bool=1
+	elif (programme==3):
+		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0']
+		var_bool=1
+	elif (programme==4):
+		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0',' ','.',',']
+		var_bool=1
+	elif (programme==5):
+		caracteres=['1','2','3','4','5','6','7','8','9','0']
+		var_bool=1
+	else:
+		print(CRED+"Entree invalide... Try smarter! Les possibilités sont claires:)"+CEND)
 # La taille de votre modulo dependra du nombre de caracteres a coder
-caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v']
+# caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','_']
 # caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0']
+
+
+
 nchar=len(caracteres)
 bl_size=nchar**kerr
 ordre = 0
@@ -32,13 +64,13 @@ while(ordre < bl_size):
 
 	print("\nIl y a "+str(nchar)+" caracteres a encoder sur des blocs de taille "+str(kerr)+".")
 	print("Nous avons donc besoin d'au moins "+ str(bl_size) +" points elliptiques. \n")
-	# Cette section pourrait permettre un choix automatique du modulo
+	# Cette section permet une assistance au choix du modulo
 	up = bl_size + 50
 	n_premiers(bl_size,up)
 	modulo = int(input("\nEntrez la valeur du modulo (voir liste):  "))
-	bool_premier = is_prime(modulo)
-	if bool_premier:
-		# modulo=503
+	liste_premiers = n_premiers(2,modulo)
+	if modulo in liste_premiers:
+		print("Le Modulo ", modulo, " est premier et donc valide.")
 		temp=0
 		i=1
 		best_gen=[]
@@ -49,10 +81,13 @@ while(ordre < bl_size):
 		print('best_gen*********************************************************************',best_gen)
 		ordre = best_gen[1]
 		print(ordre)
+		if len(best_gen[0]) == 0:
+			print(CRED + "Error : Le modulo que vous avez choisi ne permet pas de coder tous vos points. \n Tentez avec une valeur plus grande " + CEND)
+			ordre = 0
 		G=best_gen[0]
 		print(G)
 		if ordre < bl_size:
-			print(CRED + "Error : Le modulo que vous avez choisi ne permet pas de coder tous vos points. \n Il faut en choisir un plus grand " + CEND)
+			print(CRED + "Error : Le modulo que vous avez choisi ne permet pas de coder tous vos points. \n Tentez avec une valeur plus grande " + CEND)
 			ordre = 0
 		else:
 			break
@@ -126,9 +161,10 @@ k = 3265477 # cle privee
 l = 23 # cle publique
 beta = k%modulo
 texte1="headdonaddon"
+print(texte1)
 # texte1="alphayayamaster2sicom2019"
 # texte="sicom2019"
-print(len(texte1))
+# print(len(texte1))
 result = [] # Sequence des codes decryptes
 codec = [] # Sequence des codes cryptes
 indice=0
@@ -141,18 +177,18 @@ bonus='h' # Caractere de bourage
 toto=0
 
 if (len(texte1))%kerr==1:
-	print("La chaine est impaire")
+	print("La chaine est impaire ("+ str(len(texte1)) +")")
 	texte1=texte1+bonus
 	texte1 = binascii.hexlify(texte1.encode()) # Conversion en hexadecimal
 else:
-	print("La chaine est paire")
+	print("La chaine est paire("+ str(len(texte1)) +")")
 	texte1 = binascii.hexlify(texte1.encode()) # Conversion en hexadecimal
 
 
 while toto!=1:
 	m=texte1[indice:indice+2*kerr]
 	indice=indice+2*kerr
-	print(" Message a chiffrer:", m)
+	# print(" Message a chiffrer:", m)
 	# Crypter notre chaine de caractere
 	nombre=combs.index(m)
 	point=(couple[nombre]) # Point equivalent du message dans la courbe elliptique
@@ -160,57 +196,76 @@ while toto!=1:
 	print(crypte)
 	# ajout a la liste
 	codec.append(crypte)
-	# Transformation de la liste de points elliptiques en chaine hexadecimale
-	for code in codec:
-		print (code)
-		var1 = code[0]
-		v1 = couple.index(var1)
-		cm1 = combs[v1]
-		var2 = code[1]
-		v2 = couple.index(var2)
-		cm2 = combs[v2]
-		hexamessagec = hexamessagec + (str(cm1)) # Concateneation a la chaine hexadecimale
-		cm1 = binascii.unhexlify(cm1).decode() # Conversion en chaine de caracteres
-		messagec=messagec+cm1 # Concatenation a la chaine de caracteres
-		hexamessagec = hexamessagec + (str(cm2)) # Concateneation a la chaine hexadecimale
-		cm2 = binascii.unhexlify(cm2).decode() # Conversion en chaine de caracteres
-		messagec=messagec+cm2 # Concatenation a la chaine de caracteres
+		# Transformation de la liste de points elliptiques en chaine hexadecimale
+	if(indice>=len(texte1)):
+		toto=1
+
+for code in codec:
+	# print (code)
+	var1 = code[0]
+	v1 = couple.index(var1)
+	cm1 = combs[v1]
+	var2 = code[1]
+	v2 = couple.index(var2)
+	cm2 = combs[v2]
+	hexamessagec = hexamessagec + (str(cm1)) # Concateneation a la chaine hexadecimale
+	cm1 = binascii.unhexlify(cm1).decode() # Conversion en chaine de caracteres
+	messagec=messagec+cm1 # Concatenation a la chaine de caracteres
+	hexamessagec = hexamessagec + (str(cm2)) # Concateneation a la chaine hexadecimale
+	cm2 = binascii.unhexlify(cm2).decode() # Conversion en chaine de caracteres
+	messagec=messagec+cm2 # Concatenation a la chaine de caracteres
+# Sortie de la boucle
+resultc = messagec
+# print(resultc)
+indice=0
+result=[]
+# conversion du message chiffre en caracteres hexadecimaux 
+messagec = binascii.hexlify(messagec.encode())
+# print("messagec = ", messagec)
+
+while (indice<len(messagec)):
+	m=messagec[indice:indice+2*kerr] # recuperer l'encodege hexadecimal de chaque bloc
+	indice=indice+2*kerr
+	# print(m)
+	point=(couple[combs.index(m)]) # association avec un point elliptique
+	# print(point)
+	result.append(point)
+print(result)
+indice=1
+# ma_var= 1
+cle = result[0]
+dcodec = []
+while (indice < len(result)):
+	val_temp = (cle,result[indice])
+	# print(val_temp)
 	
-	# Decrypter le message transmis
-	decrypte = decrypter(crypte, bl_size, couple, l)
+	indice = indice + 2
+	decrypte = decrypter(val_temp, bl_size, couple, l)
+	dcodec.append(decrypte)
+
+	
+	# # Decrypter le message transmis
 	index = couple.index(decrypte)
 	decm=combs[index]
-	print(" Le message dechiffre est :", decm)
+	# print(" Le message dechiffre est :", decm)
 	hexamessage = hexamessage + (str(decm))
 	decm = binascii.unhexlify(decm).decode() # Conversion en chaine de caracteres
 	message=message+decm
-	# Ajout a la liste
-	result.append(decrypte)
-	# Sortie de la boucle
-	if(indice>=len(texte1)):
-		toto=1
+	# # Ajout a la liste
+	# result.append(decrypte)
+
 # Affichage synthetique des resultats 
-print("_________________" * 3 )
+print(CVRT+"_________________" * 3 )
 print("_________________    RESULTATS    _________________")
-print("_________________" * 3 + "\n")
-print("Code chiffre: liste de points ",codec)
-print("\nMessage hexa chiffre:", hexamessagec + "\n")
-print("Message chiffre:", messagec)
-print("_________________" * 3 + "\n")
-print("Code dechiffre: liste de points ",result)
-print("\nMessage hexa dechiffre:", hexamessage + "\n")
-print("Message dechiffre:", message + "\n")
+print("_________________" * 3 + "\n"+CEND)
+print(CVRT+"Codes chiffrés:"+CEND+" liste de points ",codec)
+print(CVRT+"\nMessage hexa chiffré:"+CEND, hexamessagec + "\n")
+print(CVRT+"Message chiffré:"+CEND, resultc)
+print(CVRT+"_________________" * 3 + "\n"+CEND)
+print(CVRT+"Codes dechiffrés:"+CEND+" liste de points ",dcodec)
+print(CVRT+"\nMessage hexa dechiffré:"+CEND, hexamessage + "\n")
+print(CVRT+"Message dechiffré:"+CEND, message + "\n")
 
-indice=0
-messagec = binascii.hexlify(messagec.encode())
-while (indice<len(messagec)):
-	m=messagec[indice:indice+2*kerr]
-	indice=indice+2*kerr
-	print(m)
-	point=(couple[combs.index(m)])
-	print(point)
-
-
-# fichier = input("Entrez le nom de votre fichier: ")
+fichier = str(input("Entrez le nom de votre fichier: "))
 # fichier = raw_input("Entrez le nom de votre fichier: ")
-# hash_fichier(fichier)
+hash_fichier(fichier)

@@ -3,6 +3,10 @@ import binascii
 import math
 import hashlib
 
+CVRT = '\033[92m'
+CBLU = '\033[94m'
+CEND = '\033[0m'
+
 # Calcul des modulos possibles
 def n_premiers(lower,upper):
 	print("Les nombres premiers entre",lower,"et",upper,"sont:")
@@ -16,7 +20,8 @@ def n_premiers(lower,upper):
 	       else:
 	           #print(num)
 	           prime.append(num)
-	print(prime)
+	print(CVRT + str(prime) + CEND)
+	return prime
 
 # Conversion en hexadecimal
 def hexadeci(listed):
@@ -35,15 +40,7 @@ def deci(listeh):
 		listed.append(deci)
 	print(listed)
 	return listed
-# Verifier si un nombre est premier
-def is_prime(nombre_premier):
-	g = True
-	for i in (2,nombre_premier):
-		while g:
-			if nombre_premier%i == 0:
-				return False
-			else:
-				return True
+
 # Algorithme dEuclide etendu 
 def euclide_etendu(e, phi_n, val) :
   d = 1
@@ -75,7 +72,7 @@ def decrypter(m, phi_n, tab, kpv) :
 	indice2=tab.index(y2)
 	dec = (indice2-(kpv-1)*indice1)%phi_n
 	dcpt=tab[dec]
-	print("code dechiffre:", dcpt)
+	# print("code dechiffre:", dcpt)
 	return dcpt
 
 # Calcul de 2 alpha
@@ -181,7 +178,8 @@ def best_generator(Gen,a,b,mod,bs):
 	b_size=0
 	order=0
 	b_gen=[]
-	print('Gen_0__________________________________',Gen[0])
+	print('Gen_0__________________________________',Gen[0],"\n")
+	print(CBLU+"Veuillez patienter... Le calcul du meilleur generateur est en cours"+CEND)
 	# b_size=mod+2*(mod**(1/2))+1
 	b_size=mod+2*math.sqrt(mod)+1
 	# b_size=calc_order_Gen(Gen[0],a,b,mod)
