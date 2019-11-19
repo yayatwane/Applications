@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% content block %}
+<h1>Documents</h1>
+<ul>
+    {% for document in documents %}
+        <li>{{document.name}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
