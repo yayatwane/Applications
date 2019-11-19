@@ -24,25 +24,35 @@ possibilites = {
 	2: 'Caracteres alphabetiques - avec espaces, points et virgules',
 	3: 'Caracteres alphanumeriques - sans espace',
 	4: 'Caracteres alphanumeriques - avec espaces, points et virgules',
-	5: 'Caracteres numeriques'
+	5: 'Caracteres numeriques',
+	6: 'Caracteres de hash - hexadecimal [0..9-a..f]'
 }
 while (var_bool==0):
-	programme = input(CVRT+'\n\nChoisissez le programme a implementer: \n - [1] Caracteres alphabetiques - sans espace \n - [2] Caracteres alphabetiques - avec espaces, points et virgules \n - [3] Caracteres alphanumeriques - sans espace \n - [4] Caracteres alphanumeriques - avec espaces, points et virgules \n - [5] Caracteres numeriques \n A vous: '+CEND)
+	programme = input(CVRT+'\n\nChoisissez le programme a implementer: \n - [1] Caracteres alphabetiques - sans espace \n - [2] Caracteres alphabetiques - avec espaces, points et virgules \n - [3] Caracteres alphanumeriques - sans espace \n - [4] Caracteres alphanumeriques - avec espaces, points et virgules \n - [5] Caracteres numeriques \n - [6] Caracteres de hash - hexadecimal [0..9-a..f] \n A vous: '+CEND)
 	programme=int(programme)
 	if (programme==1):
 		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+		texte1="headdonaddon"
 		var_bool=1
 	elif (programme==2):
 		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ','.',',']
+		texte1="headdon addon"
 		var_bool=1
 	elif (programme==3):
 		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0']
+		texte1="alphayayamaster2sicom2019"
 		var_bool=1
 	elif (programme==4):
 		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0',' ','.',',']
+		texte1="alpha yaya, master 2 sicom 2019."
 		var_bool=1
 	elif (programme==5):
 		caracteres=['1','2','3','4','5','6','7','8','9','0']
+		texte1="06177992264"
+		var_bool=1
+	elif (programme==6):
+		caracteres=['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f']
+		texte1="b86caad0f27a5668a41deb4ef89b6874"
 		var_bool=1
 	else:
 		print(CRED+"Entree invalide... Try smarter! Les possibilités sont claires:)"+CEND)
@@ -160,8 +170,10 @@ print (couple)
 k = 3265477 # cle privee
 l = 23 # cle publique
 beta = k%modulo
-texte1="headdonaddon"
+
 print(texte1)
+print(CVRT+"\nMessage initial :"+CEND, str(texte1) + "\n")
+# texte1="headdonaddon"
 # texte1="alphayayamaster2sicom2019"
 # texte="sicom2019"
 # print(len(texte1))
@@ -172,7 +184,7 @@ message='' # Message decrypte
 messagec='' # Message crypte
 hexamessagec='' # Message hexadecimal crypte
 hexamessage='' # Message hexadecimal decrypte
-bonus='h' # Caractere de bourage
+bonus=caracteres[0] # Caractere de bourage
 
 toto=0
 
@@ -265,6 +277,9 @@ print(CVRT+"_________________" * 3 + "\n"+CEND)
 print(CVRT+"Codes dechiffrés:"+CEND+" liste de points ",dcodec)
 print(CVRT+"\nMessage hexa dechiffré:"+CEND, hexamessage + "\n")
 print(CVRT+"Message dechiffré:"+CEND, message + "\n")
+
+# bool_fichier = True
+
 
 fichier = str(input("Entrez le nom de votre fichier: "))
 # fichier = raw_input("Entrez le nom de votre fichier: ")
