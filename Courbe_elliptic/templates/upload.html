@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="content-section">
+    <form method="post" action="upload" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Join Today</legend>
+                <input type="file" name="document" placeholder="upload"/><br>
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Upload</button>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Already have en account? <a class="ml-2" href="#">Sign In</a>
+        </small>
+    </div>
+    <div>
+        {% for message in messages%}
+        <h3>{{message}}</h3>
+        {% endfor %}
+    </div>
+     <div>
+        {% if url%}
+         <h3>Uploaded file: <a href="{{url}}">{{url}}</a></h3>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

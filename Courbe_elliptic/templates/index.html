@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 <h1>Documents</h1>
 <ul>
@@ -7,4 +8,7 @@
         <li>{{document.name}}</li>
     {% endfor %}
 </ul>
+
+{% load static %}
+<img src="{% static 'images/1.jpg'%}" alt="">
 {% endblock %}
