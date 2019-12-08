@@ -27,5 +27,13 @@
          <h3>Uploaded file: <a href="{{url}}">{{url}}</a></h3>
         {% endif %}
     </div>
+     <div>
+        {% if sign %}
+         <h3>Empreinte Chiffree: {{sign}}</h3>
+         <form action="verifier/{{name}}" method="post">
+             <button class="btn btn-outline-info" type="submit">Verifier</button>
+         </form>
+        {% endif %}
+    </div>
 </div>
 {% endblock content %}
