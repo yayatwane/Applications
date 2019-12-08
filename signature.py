@@ -24,7 +24,7 @@ kerr=2 # Taille des blocs unitaires a encoder
 
 
 caracteres=['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f']
-fichier = str(input("Entrez le nom de votre fichier: "))
+fichier = str(input("Entrez le nom du fichier que vous souhaitez signer: "))
 texte1=hash_fichier(fichier)
 
 nchar=len(caracteres)
@@ -218,48 +218,6 @@ while (bool_fichier == True):
 		messagec=messagec+cm2 # Concatenation a la chaine de caracteres
 	# Sortie de la boucle
 	resultc = messagec
-	# print(resultc)
-	indice=0
-	result=[]
-	# conversion du message chiffre en caracteres hexadecimaux 
-	messagec = binascii.hexlify(messagec.encode())
-	# print("messagec = ", messagec)
-
-
-	# PROCESSUS de decryptage
-	# Association des valeurs hexadecimales au points elliptiques
-	while (indice<len(messagec)):
-		m=messagec[indice:indice+2*kerr] # recuperer l'encodege hexadecimal de chaque bloc
-		indice=indice+2*kerr
-		# print(m)
-		point=(couple[combs.index(m)]) # association avec un point elliptique
-		# print(point)
-		result.append(point)
-	print(result)
-
-	# Decryptage des points elliptques, concatenation et transformation en chaine de caracteres 
-	indice=1
-	# ma_var= 1
-	cle = result[0]
-	dcodec = []
-	while (indice < len(result)):
-		val_temp = (cle,result[indice])
-		# print(val_temp)
-		
-		indice = indice + 2
-		decrypte = decrypter(val_temp, bl_size, couple, l)
-		dcodec.append(decrypte)
-
-		
-		# # Decrypter le message transmis
-		index = couple.index(decrypte)
-		decm=combs[index]
-		# print(" Le message dechiffre est :", decm)
-		hexamessage = hexamessage + (str(decm))
-		decm = binascii.unhexlify(decm).decode() # Conversion en chaine de caracteres
-		message=message+decm
-		# # Ajout a la liste
-		# result.append(decrypte)
 	liste_signature.append(resultc)
 	# print(liste_signature)
 	# Affichage synthetique des resultats 
@@ -270,17 +228,14 @@ while (bool_fichier == True):
 	print(CVRT+"Codes chiffrés:"+CEND+" liste de points ",codec)
 	print(CVRT+"\nMessage hexa chiffré:"+CEND, hexamessagec + "\n")
 	print(CVRT+"Message chiffré:"+CEND, resultc)
-	print(CVRT+"_________________" * 3 + "\n"+CEND)
-	print(CVRT+"Codes dechiffrés:"+CEND+" liste de points ",dcodec)
-	print(CVRT+"\nMessage hexa dechiffré:"+CEND, hexamessage + "\n")
-	print(CVRT+"Message dechiffré:"+CEND, message + "\n\n")
+	
 
 	signedLabel = "_signature"
 	extension = ".txt"
 	new = re.sub('\.txt$', '', fichier)
 	new = new + signedLabel + extension
-	print(new)
-	print(liste_signature)
+	# print(new)
+	print("\nVoici la signature : "+ CVRT+ str(liste_signature) + CEND)
 
 	MyFile=open(new,'w+')
 	for element in liste_signature:
@@ -290,7 +245,7 @@ while (bool_fichier == True):
 	
 
 	# CETTE PARTIE EST DESTINEE A UNE AUTRE APPLICATION
-	print(CVRT+"\nSouhaitez vous hasher un autre document ?"+CEND)
+	print(CVRT+"\nSouhaitez vous signer un autre document ?"+CEND)
 	reponse = (str(input("Reponse (Oui/Non): "))).lower()
 	# print(reponse)
 
