@@ -23,6 +23,8 @@ ________________________________________________________________________________
 13)Done - Affichage d'une liste indicative de modulos eventuels   - Uploaded
 14)Done - Mise en fonction generale des fonctionnalités			  - Uploaded
 15)Done - Verificatio de a et b (valeur entiere) 				  - Uploaded
+16)Done - Signature de documents								  - Uploaded
+17)Done - Verification de la Signature 							  - Uploaded
 ____________________________________________________________________________________________________________
 Tests et Utilisation
 ____________________________________________________________________________________________________________
@@ -43,3 +45,8 @@ Pour chaque option, une chaine de caracteres est definie dans la premier boucle 
 
 Notre script appelle le fichier de fonctions nommé fonctions.py
 Le code est commenté de maniere assez detaillée et la navigation a travers le code est assez facile.
+____________________________________________________________________________________________________________
+Pour signer un document, executer le fichier signature.py. Un fichier de signature sera genere.
+Il contiendra les valeurs de a, b, modulo, la cle publique et l'empreinte chiffree.
+Le fichier verification.py permet de comparer l'empreinte (issu du hachage du fichier) et l'empreinte 
+obtenue apres dechiffrement de l'empreinte chiffree (issue du fichier de signature)
