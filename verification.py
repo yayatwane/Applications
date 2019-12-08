@@ -24,7 +24,7 @@ kerr=2 # Taille des blocs unitaires a encoder
 
 
 caracteres=['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f']
-fichier="texte.txt"
+fichier="fichier1.txt"
 
 
 nchar=len(caracteres)
@@ -156,14 +156,15 @@ while (bool_fichier == True):
 		point=(couple[combs.index(m)]) # association avec un point elliptique
 		# print(point)
 		result.append(point)
-	print(result)
+	print("resultat : ",result)
 
 	# Decryptage des points elliptques, concatenation et transformation en chaine de caracteres 
 	indice=1
 	# ma_var= 1
-	cle = result[0]
+	
 	dcodec = []
 	while (indice < len(result)):
+		cle = result[indice-1]
 		val_temp = (cle,result[indice])
 		# print(val_temp)
 		

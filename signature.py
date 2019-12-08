@@ -158,10 +158,11 @@ for x,y in zip(listex,listey):
  couple.append(a)
 print (couple)
 ## Cryptage
-k = 3265477 # cle privee
+# k = 3265477 # cle privee
+
 l = 23 # cle publique
 liste_signature.append(l)
-beta = k%modulo
+# beta = k%modulo
 bool_fichier = True
 while (bool_fichier == True):
 	print(CVRT+"\n\nMessage initial :"+CEND, str(texte1) + "\n")
@@ -189,6 +190,7 @@ while (bool_fichier == True):
 	# PROCESSUS de Cryptage de la chaine de caracteres
 	# Cryptage puis concatenation des valeurs hexadecimales associees
 	while toto!=1:
+		k = random.randint(1,1000000)
 		m=texte1[indice:indice+2*kerr]
 		indice=indice+2*kerr
 		# print(" Message a chiffrer:", m)
