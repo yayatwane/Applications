@@ -29,6 +29,7 @@ def hexadeci(listed):
 	for uni in listed:
 		hexa = binascii.hexlify(uni.encode())
 		listeh.append(hexa)
+	print(CVRT+"Liste des blocs de taille 2 (hexadecimal): "+CEND)
 	print(listeh)
 	return listeh
 
@@ -101,7 +102,7 @@ def calc_o_alpha(x1,y1,x2,y2,mod,a):
 	temp.append(y3)
 	return temp
 
-# Calcul des generateurs
+# Calcul de tous les generateurs
 def calc_G(a,b,mod):
 	x=1
 	entier=0

@@ -11,6 +11,7 @@ import math
 from itertools import product
 import binascii
 from fonctions import n_premiers, hexadeci, deci, euclide_etendu, crypter, decrypter, calc_2alpha, calc_o_alpha, calc_n_alpha, calc_G, calc_order_Gen, best_generator, hash_fichier
+import re
 
 CRED = '\033[91m'
 CVRT = '\033[92m'
@@ -21,51 +22,10 @@ listex=[]
 listey=[]
 kerr=2 # Taille des blocs unitaires a encoder
 
-# Menu d'accueil
-# La taille de votre modulo dependra du nombre de caracteres a coder
-var_bool=0
-possibilites = {
-	1: 'Caracteres alphabetiques - sans espace',
-	2: 'Caracteres alphabetiques - avec espaces, points et virgules',
-	3: 'Caracteres alphanumeriques - sans espace',
-	4: 'Caracteres alphanumeriques - avec espaces, points et virgules',
-	5: 'Caracteres numeriques',
-	6: 'Caracteres de hash - hexadecimal [0..9-a..f]'
-}
-while (var_bool==0):
-	programme = input(CVRT+'\n\nChoisissez le programme a implementer: \n - [1] Caracteres alphabetiques - sans espace \n - [2] Caracteres alphabetiques - avec espaces, points et virgules \n - [3] Caracteres alphanumeriques - sans espace \n - [4] Caracteres alphanumeriques - avec espaces, points et virgules \n - [5] Caracteres numeriques \n - [6] Caracteres de hash - hexadecimal [0..9-a..f] \n A vous: '+CEND)
-	programme=int(programme)
-	if (programme==1):
-		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
-		texte1="headdonaddon"
-		var_bool=1
-	elif (programme==2):
-		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',' ','.',',']
-		texte1="headdon addon"
-		var_bool=1
-	elif (programme==3):
-		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0']
-		texte1="alphayayamaster2sicom2019"
-		var_bool=1
-	elif (programme==4):
-		caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0',' ','.',',']
-		texte1="alpha yaya, master 2 sicom 2019."
-		var_bool=1
-	elif (programme==5):
-		caracteres=['1','2','3','4','5','6','7','8','9','0']
-		texte1="06177992264"
-		var_bool=1
-	elif (programme==6):
-		caracteres=['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f']
-		texte1="b86caad0f27a5668a41deb4ef89b6874"
-		var_bool=1
-	else:
-		print(CRED+"Entree invalide... Try smarter! Les possibilités sont claires:)"+CEND)
-# La taille de votre modulo dependra du nombre de caracteres a coder
-# caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','_']
-# caracteres=['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0']
 
-
+caracteres=['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f']
+fichier = str(input("Entrez le nom de votre fichier: "))
+texte1=hash_fichier(fichier)
 
 nchar=len(caracteres)
 bl_size=nchar**kerr
@@ -92,6 +52,9 @@ a=int(a)
 b=int(b)
 print("a: ", a)
 print("b: ", b)
+liste_signature=[]
+liste_signature.append(a)
+liste_signature.append(b)
 
 lambd=0
 
@@ -132,6 +95,7 @@ while(ordre < bl_size):
 		print(CRED + "Error : Le modulo que vous avez choisi n'est pas un nombre premier." + CEND)
 		ordre = 0
 
+liste_signature.append(modulo)
 # Genese des blocs de taille 2
 print(CVRT+"\n\nListe des blocs de taille 2: "+CEND)
 combs = [''.join(comb) for comb in product(caracteres, repeat=kerr)]
@@ -196,6 +160,7 @@ print (couple)
 ## Cryptage
 k = 3265477 # cle privee
 l = 23 # cle publique
+liste_signature.append(l)
 beta = k%modulo
 bool_fichier = True
 while (bool_fichier == True):
@@ -295,7 +260,8 @@ while (bool_fichier == True):
 		message=message+decm
 		# # Ajout a la liste
 		# result.append(decrypte)
-
+	liste_signature.append(resultc)
+	# print(liste_signature)
 	# Affichage synthetique des resultats 
 	print(CVRT+"_________________" * 3 )
 	print("_________________    RESULTATS    _________________")
@@ -309,8 +275,22 @@ while (bool_fichier == True):
 	print(CVRT+"\nMessage hexa dechiffré:"+CEND, hexamessage + "\n")
 	print(CVRT+"Message dechiffré:"+CEND, message + "\n\n")
 
+	signedLabel = "_signature"
+	extension = ".txt"
+	new = re.sub('\.txt$', '', fichier)
+	new = new + signedLabel + extension
+	print(new)
+	print(liste_signature)
+
+	MyFile=open(new,'w+')
+	for element in liste_signature:
+		MyFile.write(str(element))
+		MyFile.write('\n')
+	MyFile.close()
+	
+
 	# CETTE PARTIE EST DESTINEE A UNE AUTRE APPLICATION
-	print(CVRT+"\nSouhaitez vous hasher un document ?"+CEND)
+	print(CVRT+"\nSouhaitez vous hasher un autre document ?"+CEND)
 	reponse = (str(input("Reponse (Oui/Non): "))).lower()
 	# print(reponse)
 
