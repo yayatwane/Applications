@@ -13,18 +13,18 @@ ________________________________________________________________________________
 3) Done - Generer les blocs a partir de la liste de {caracteres}  - Uploaded
 4) Done - Coder en ascii puis stocker dans la liste de {blocs}    - Uploaded
 5) Done - Générer notre $modulo tel que modulo > bl_size          - Uploaded
-6) Done - Choisir un générateur tel que ordre(G) > bl_size		  - Uploaded		
+6) Done - Choisir un générateur tel que ordre(G) > bl_size	  - Uploaded		
 7) Done - Associer le blocs[i] à coder à un point elliptique      - Uploaded
 8) Done - Chiffrer le bloc                                        - Uploaded
 9) Done - Déchiffrer le bloc                                      - Uploaded
-10)Done - Mise en fonction des operations d'addition			  - Uploaded
-11)Done - Cryptage hexadecimal des blocs ascii avant envoi		  - Uploaded
-12)Done - Verification du modulo (primalite et ordre maximal)	  - Uploaded
-13)Done - Affichage d'une liste indicative de modulos eventuels   - Uploaded
-14)Done - Mise en fonction generale des fonctionnalités			  - Uploaded
-15)Done - Verificatio de a et b (valeur entiere) 				  - Uploaded
-16)Done - Signature de documents								  - Uploaded
-17)Done - Verification de la Signature 							  - Uploaded
+10) Done - Mise en fonction des operations d'addition		  - Uploaded
+11) Done - Cryptage hexadecimal des blocs ascii avant envoi	  - Uploaded
+12) Done - Verification du modulo (primalite et ordre maximal)	  - Uploaded
+13) Done - Affichage d'une liste indicative de modulos eventuels   - Uploaded
+14) Done - Mise en fonction generale des fonctionnalités		  - Uploaded
+15) Done - Verificatio de a et b (valeur entiere) 		  - Uploaded
+16) Done - Signature de documents				  - Uploaded
+17) Done - Verification de la Signature 				  - Uploaded
 ____________________________________________________________________________________________________________
 Tests et Utilisation
 ____________________________________________________________________________________________________________
