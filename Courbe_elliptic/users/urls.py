@@ -7,5 +7,5 @@ urlpatterns = [
     path('register', views.register),
     path('login', views.login),
     path('upload', views.upload),
-    path('verifier/<slug:name>/', views.verifier)
+    path('verifier', views.verification)
 ]

@@ -9,6 +9,7 @@ import media
 # Create your views here.
 from media.fonctions import hash_fichier
 from media import signature1
+from media.verification import verifier
 
 
 def index(request):
@@ -96,6 +97,31 @@ def signature(request,upload_file):
     return liste_signature
 
 
-#def verifier(request):
-#    print(name)
-#    return render(request, 'upload.html')
+def verification(request):
+    context = {}
+    if request.method == 'POST':
+        file1 = request.FILES['file1']
+        file2=request.FILES['file2']
+        print("Premier fichier",file1)
+        print("Fichier de signature", file2)
+        fs = FileSystemStorage()
+        name1 = fs.save(file1.name, file1)
+        context['url1'] = fs.url(name1)
+        context['f_name1']=file1.name
+        print('Document 1 saved')
+        fs = FileSystemStorage()
+        name2 = fs.save(file2.name, file2)
+        context['url2'] = fs.url(name2)
+        context['f_name2'] = file2.name
+        print('Document 2 saved')
+        messages.info(request, 'document saved')
+        print(context['url1'])
+        print(context['url2'])
+        check_bool = verifier(file1.name, file2.name)
+        if check_bool:
+            context['verif']="Le fichier est authentique"
+        else:
+            context['verif'] = "Le fichier est n'est pas authentique"
+        return render(request, 'check.html', context)
+    else:
+        return render(request, 'check.html')
