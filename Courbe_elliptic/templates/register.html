@@ -24,13 +24,15 @@
             Already have en account? <a class="ml-2" href="#">Sign In</a>
         </small>
     </div>
-    <div>
+
+</div>
+         </div>
+   <div class="col">
+       <div>
         {% for message in messages%}
         <h3>{{message}}</h3>
         {% endfor %}
     </div>
-</div>
-         </div>
-   <div class="col"></div>
+   </div>
 </div>
 {% endblock content %}

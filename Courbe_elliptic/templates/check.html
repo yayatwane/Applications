@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
 <div class="content-section">
     <form method="post" action="verifier" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Join Today</legend>
-                <label>Charger le fichier a verifier</label><br>
-                <input type="file" name="file1" placeholder="upload"/><br>
-                <label>Charger le fichier de signature</label><br>
-                <input type="file" name="file2" placeholder="upload"/><br>
+                <label class="form-control">Charger le fichier a verifier</label><br>
+                <input class="form-control" type="file" name="file1" placeholder="upload"/><br>
+                <label class="form-control">Charger le fichier de signature</label><br>
+                <input class="form-control" type="file" name="file2" placeholder="upload"/><br>
         </fieldset>
         <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Verifier</button>
+            <button class="btn btn-outline-info form-control" type="submit">Verifier</button>
         </div>
     </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Already have en account? <a class="ml-2" href="#">Sign In</a>
-        </small>
-    </div>
-    <div>
+
+</div>
+            </div>
+   <div class="col">
+          <div>
         {% for message in messages%}
         <h3>{{message}}</h3>
         {% endfor %}
@@ -35,8 +36,9 @@
     </div>
      <div>
         {% if verif %}
-         <h3>Resultat de la verification: {{verif}}</h3>
+         <h3>Resultat de la verification: <br><b>{{verif}}</b></h3>
         {% endif %}
     </div>
-</div>
+   </div>
+</div
 {% endblock content %}

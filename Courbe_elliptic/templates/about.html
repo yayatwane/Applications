@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-3">
+        <h2>Courbe Elliptique</h2><hr>
+        {% load static %}
+        <img class="img img-rounded" style="height:80%;width:80%" src="{% static 'images/ellip.gif' %}">
+    </div>
+    <div class="col-sm-5">
+        <h2>A propos de nous</h2><hr>
+       <p style="text-align:justify"> e-Sign est une Application de signature de documents en ligne en utilisant des courbes elliptiques.
+           C'est une application écrite en python et qui utilise l'Algorithme ECDSA en back-end pour
+           signer des documents et verifier la signature d'un document. L'Application est developpé en utilisant Django.</p><br><hr>
+<p style="text-align:justify">
+    Il est possible de décrire concrètement les courbes elliptiques sur les nombres réels,
+        et de définir en particulier l'addition des points, avec les connaissances d'un étudiant au niveau lycée. Dans cette section,
+        le cadre est celui du plan réel euclidien, les points considérés ont des coordonnées x, y réelles,
+        les droites et les courbes sont définies par des équations à coefficients réels. Pour la commodité de la description,
+        l'axe des ordonnées détermine une direction qualifiée de « verticale ».
+<br>
+L'équation d'une courbe elliptique définie sur le corps des nombres réels peut être mise sous la forme plus simple (dite équation de Weierstrass) :<br>
+        <b>y^2 = x^3 + ax + b</b><br>
+
+où les coefficients a, b sont des nombres réels. Selon le choix de ces coefficients, les graphes correspondants ont essentiellement
+        deux formes possibles. Voici par exemple les graphes réels associés à deux courbes elliptiques dans le plan affine:
+    </p></div>
+   <div class="col-sm-3">
+       <h2>Auteur</h2><hr>
+       <div class="row">
+         <div class="col">
+           {% load static %}
+             <img class="img img-rounded" style="height:80%;width:80%" src="{% static 'images/alpha.jpg' %}">
+         </div>
+           <div class="col"><b>Kanté Alpha Oumar</b></div>
+       </div>
+       <div class="row">
+         <div class="col">
+           {% load static %}
+             <img class="img img-rounded" style="height:80%;width:80%" src="{% static 'images/yaya.jpg' %}">
+         </div>
+           <div class="col"><b>Yaya Wane</b></div>
+       </div>
+   </div>
+
+</div>
+{% endblock content %}

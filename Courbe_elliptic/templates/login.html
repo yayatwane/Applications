@@ -8,8 +8,8 @@
         {% csrf_token %}
         <fieldset class="form-group">
             <legend class="border-bottom mb-4">Join Today</legend>
-                <input type="text" name="username" placeholder="First name" class="form-control"/><br>
-                <input type="text" name="password1" placeholder="Last name" class="form-control" /><br>
+                <input type="text" name="username" placeholder="username" class="form-control"/><br>
+                <input type="password" name="password1" placeholder="password" class="form-control" /><br>
         </fieldset>
         <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Login</button>
@@ -17,16 +17,18 @@
     </form>
     <div class="border-top pt-3">
         <small class="text-muted">
-            Already have en account? <a class="ml-2" href="users">Sign Up</a>
+            Already have en account? <a class="ml-2" href="register">Sign Up</a>
         </small>
     </div>
-    <div>
+
+</div>
+    </div>
+   <div class="col">
+       <div>
         {% for message in messages%}
         <h3>{{message}}</h3>
         {% endfor %}
     </div>
-</div>
-    </div>
-   <div class="col"></div>
+   </div>
 </div>
 {% endblock content %}

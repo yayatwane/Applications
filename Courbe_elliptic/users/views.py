@@ -6,6 +6,7 @@ from django.contrib.auth.models import User, auth
 from media import fonctions
 import media
 
+
 # Create your views here.
 from media.fonctions import hash_fichier
 from media import signature1
@@ -13,7 +14,7 @@ from media.verification import verifier
 
 
 def index(request):
-    return render(request, 'register.html')
+    return render(request, 'login.html')
 
 
 def register(request):
@@ -53,12 +54,15 @@ def login(request):
         password1 = request.POST['password1']
         print(password1)
         print(username)
-        check = auth.authenticate(username=username, password=password1)
-        if check is not None:
-            auth.login(request, check)
+        user = auth.authenticate(username=username, password=password1)
+        print('user', user)
+        if user is not None:
+            auth.login(request, user)
             print("login successful")
             messages.info(request, 'login successful')
-            return render(request, 'home.html')
+            print('login', User.is_authenticated)
+            return render(request, 'upload.html')
+            #return redirect('register')
         else:
             messages.info(request, 'invalid credentials')
             return render(request, 'login.html')
@@ -125,3 +129,14 @@ def verification(request):
         return render(request, 'check.html', context)
     else:
         return render(request, 'check.html')
+
+
+def logout(request):
+    auth.logout(request)
+    return render(request, 'login.html')
+
+
+def about(request):
+    return render(request, 'about.html')
+
+

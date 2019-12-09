@@ -1,23 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
-
+<div class="row">
+    <div class="col"></div>
+    <div class="col">
 <div class="content-section">
     <form method="post" action="upload" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Join Today</legend>
-                <input type="file" name="document" placeholder="upload"/><br>
+            <legend class="border-bottom mb-4">Télécharger le fichier a signer</legend>
+                <label for="document" class="form-control">Fichier : </label><hr><input class="form-control" type="file" name="document" placeholder="upload"/><br>
         </fieldset>
         <div class="form-group">
             <button class="btn btn-outline-info" type="submit">Upload</button>
         </div>
     </form>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Already have en account? <a class="ml-2" href="#">Sign In</a>
-        </small>
-    </div>
-    <div>
+>
+</div>
+            </div>
+   <div class="col">
+           <div>
         {% for message in messages%}
         <h3>{{message}}</h3>
         {% endfor %}
@@ -34,6 +35,7 @@
              <button class="btn btn-outline-info" type="submit">Verifier</button>
          </form>
         {% endif %}
-    </div>
-</div>
+    </div
+   </div>
+</div
 {% endblock content %}
