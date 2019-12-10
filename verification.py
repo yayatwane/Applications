@@ -161,9 +161,10 @@ while (bool_fichier == True):
 	# Decryptage des points elliptques, concatenation et transformation en chaine de caracteres 
 	indice=1
 	# ma_var= 1
-	cle = result[0]
+	# cle = result[0]
 	dcodec = []
 	while (indice < len(result)):
+		cle = result[indice-1]
 		val_temp = (cle,result[indice])
 		# print(val_temp)
 		
