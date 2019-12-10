@@ -24,7 +24,8 @@ kerr=2 # Taille des blocs unitaires a encoder
 
 
 caracteres=['1','2','3','4','5','6','7','8','9','0','a','b','c','d','e','f']
-fichier="fichier1.txt"
+fichier = str(input("Entrez le nom du fichier dont vous souhaitez verifier l'authenticite: "))
+# fichier="fichier1.txt"
 
 
 nchar=len(caracteres)

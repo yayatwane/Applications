@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User, auth
 from media import fonctions
 import media
+import os
 
 
 # Create your views here.
@@ -75,6 +76,12 @@ def upload(request):
     if request.method == 'POST':
         upload_file = request.FILES['document']
         print(upload_file)
+        chemin= "./media/"+str(upload_file.name)
+        print(chemin)
+        if os.path.exists(chemin):
+            print("chemin: ",chemin)
+            os.remove(chemin)
+
         fs = FileSystemStorage()
         name = fs.save(upload_file.name, upload_file)
         context['url'] = fs.url(name)
@@ -96,6 +103,7 @@ def signature(request,upload_file):
     caracteres = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'a', 'b', 'c', 'd', 'e', 'f']
     texte1 = hash_fichier(upload_file.name)
     fichier = upload_file.name
+    print(fichier)
     print('texte1',texte1)
     liste_signature = signature1.signer(caracteres, texte1, kerr, listex, listey,fichier)
     return liste_signature
@@ -106,22 +114,38 @@ def verification(request):
     if request.method == 'POST':
         file1 = request.FILES['file1']
         file2=request.FILES['file2']
+        fs = FileSystemStorage()
         print("Premier fichier",file1)
         print("Fichier de signature", file2)
-        fs = FileSystemStorage()
-        name1 = fs.save(file1.name, file1)
-        context['url1'] = fs.url(name1)
+        chemin1 = "./media/"+str(file1)
+        if os.path.exists(str(chemin1)) == False:
+            print("chemin: ",chemin1)
+            # os.remove(str(file1))
+            fs = FileSystemStorage()
+            name1 = fs.save(file1.name, file1)
+            print("file1 : ",file1.name)
+        # print("name1 : ",name1)
+        # context['url1'] = fs.url(name1)
+        context['url1'] = fs.url(file1.name)
         context['f_name1']=file1.name
         print('Document 1 saved')
-        fs = FileSystemStorage()
-        name2 = fs.save(file2.name, file2)
-        context['url2'] = fs.url(name2)
+        chemin2 = "./media/"+str(file2)
+        if os.path.exists(str(chemin2)) == False:
+            print("chemin: ",chemin2)
+            # os.remove(str(file2))
+            fs = FileSystemStorage()
+            name2 = fs.save(file2.name, file2)
+            print("file2 : ", file2.name)
+        # print("name2 : ",name2)
+        # context['url2'] = fs.url(name2)
+        context['url2'] = fs.url(file2.name)
         context['f_name2'] = file2.name
         print('Document 2 saved')
         messages.info(request, 'document saved')
         print(context['url1'])
         print(context['url2'])
-        check_bool = verifier(file1.name, file2.name)
+        check_bool = verifier(chemin1, chemin2)
+        # check_bool = verifier(file1.name, file2.name)
         if check_bool:
             context['verif']="Le fichier est authentique"
         else:

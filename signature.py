@@ -159,7 +159,7 @@ for x,y in zip(listex,listey):
 print (couple)
 ## Cryptage
 # k = 3265477 # cle privee
-l = 23 # cle publique
+l = random.randint(1,1000000) # cle publique
 liste_signature.append(l)
 bool_fichier = True
 while (bool_fichier == True):
