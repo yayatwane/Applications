@@ -52,12 +52,12 @@ def euclide_etendu(e, phi_n, val) :
   return d
 
 # Cryptage
-def crypter(m, phi_n, tab, k, kpv) :
+def crypter(m, phi_n, tab, k, kpb) :
 	cpt=[]
 	## Cryptage
 	print("code a chiffrer:" , m)
 	y1=tab[(k-1)%phi_n]
-	y2=tab.index(m)+((k-1)*(kpv-1))
+	y2=tab.index(m)+((k-1)*(kpb-1))
 	indice2 = y2%phi_n
 	y2=tab[indice2]
 	cpt=(y1,y2)
@@ -65,13 +65,13 @@ def crypter(m, phi_n, tab, k, kpv) :
 
 	return cpt
 # Decryptage
-def decrypter(m, phi_n, tab, kpv) :
+def decrypter(m, phi_n, tab, kpb) :
 	dcpt=[]
 	y1 = m[0]
 	y2 = m[1]
 	indice1=tab.index(y1)
 	indice2=tab.index(y2)
-	dec = (indice2-(kpv-1)*indice1)%phi_n
+	dec = (indice2-(kpb-1)*indice1)%phi_n
 	dcpt=tab[dec]
 	# print("code dechiffre:", dcpt)
 	return dcpt
